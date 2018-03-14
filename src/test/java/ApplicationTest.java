@@ -1,6 +1,5 @@
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.Assertion;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 import java.io.ByteArrayOutputStream;
@@ -25,20 +24,15 @@ public class ApplicationTest {
         ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(outputBuffer);
         String expectedOutPut = " A B C\n" +
-                "0 | | \n" +
-                " -+-+-\n" +
-                "1 | | \n" +
-                " -+-+-\n" +
-                "2 | | \n" +
-                "Command: ";
+                                "0 | | \n" +
+                                " -+-+-\n" +
+                                "1 | | \n" +
+                                " -+-+-\n" +
+                                "2 | | \n" +
+                                "Command: ";
 
         exit.expectSystemExit();
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() throws Exception {
-                assertEquals(expectedOutPut, outputBuffer.toString());
-            }
-        });
+        exit.checkAssertionAfterwards(() -> assertEquals(expectedOutPut, outputBuffer.toString()));
 
         new Application(new StringReader("exit\n"), out);
     }
@@ -64,12 +58,7 @@ public class ApplicationTest {
                                 "Command: ";
 
         exit.expectSystemExit();
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() throws Exception {
-                assertEquals(expectedOutPut, outputBuffer.toString());
-            }
-        });
+        exit.checkAssertionAfterwards(() -> assertEquals(expectedOutPut, outputBuffer.toString()));
 
         new Application(new StringReader("A0\nexit\n"), out);
     }
@@ -103,12 +92,7 @@ public class ApplicationTest {
                                 "Command: ";
 
         exit.expectSystemExit();
-        exit.checkAssertionAfterwards(new Assertion() {
-            @Override
-            public void checkAssertion() throws Exception {
-                assertEquals(expectedOutPut, outputBuffer.toString());
-            }
-        });
+        exit.checkAssertionAfterwards(() -> assertEquals(expectedOutPut, outputBuffer.toString()));
 
         new Application(new StringReader("B1\nnew\nexit\n"), out);
     }

@@ -1,12 +1,19 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class GameTest {
 
+    private Game game;
+
+    @Before
+    public void setUp() throws Exception {
+        game = Game.newGame();
+    }
+
     @Test
     public void newGameHasAnEmptyBoard() {
-        Game game = Game.newGame();
         String emptyBoard = " A B C\n" +
                             "0 | | \n" +
                             " -+-+-\n" +
@@ -19,7 +26,6 @@ public class GameTest {
 
     @Test
     public void placeXAtCellA0() {
-        Game game = Game.newGame();
         game.playIn("A0");
 
         String expectedBoard =  " A B C\n" +
@@ -34,7 +40,6 @@ public class GameTest {
 
     @Test
     public void placeXAtCellC0() {
-        Game game = Game.newGame();
         game.playIn("C0");
 
         String expectedBoard =  " A B C\n" +
@@ -49,7 +54,6 @@ public class GameTest {
 
     @Test
     public void placeXAtCellA2AndThenOAtCellB1() {
-        Game game = Game.newGame();
         game.playIn("A2");
         game.playIn("B1");
 
@@ -65,7 +69,6 @@ public class GameTest {
 
     @Test
     public void playingInAnOccupiedCellWillNotChangeTheBoardState() {
-        Game game = Game.newGame();
         game.playIn("A1");
         game.playIn("B2");
         game.playIn("A1");
@@ -83,7 +86,6 @@ public class GameTest {
 
     @Test
     public void afterPlayingAWholeGameNothingWillChangeWithOtherPlays() {
-        Game game = Game.newGame();
         game.playIn("A0");
         game.playIn("A1");
         game.playIn("A2");
@@ -109,7 +111,6 @@ public class GameTest {
 
     @Test
     public void testWrongCoordinatesDoNotChangeBoard() {
-        Game game = Game.newGame();
         game.playIn("ZZ");
         game.playIn("something");
         game.playIn("");
@@ -127,7 +128,6 @@ public class GameTest {
 
     @Test
     public void coordinatesShouldBeCaseInsensitive() {
-        Game game = Game.newGame();
         game.playIn("a0");
         game.playIn("B0");
         game.playIn("c1");

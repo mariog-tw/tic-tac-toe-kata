@@ -47,7 +47,7 @@ public class Game {
     }
 
     private boolean cellCoordinatesAreNotValid(String cellCoordinates) {
-        return cellCoordinates == null || !cellCoordinates.matches("[A-Ca-c][0-2]");
+        return cellCoordinates == null || !cellCoordinates.matches("[A-Ca-c]{1}[0-2]{1}");
     }
 
     private boolean cellIsOccupied(int rowIndex, int colIndex) {
