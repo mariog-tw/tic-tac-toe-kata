@@ -1,11 +1,14 @@
 public class Game {
     private static final String EMPTY_CELL = " ";
+
     private String[][] board = new String[][] {
         {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
         {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
         {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}
     };
     private boolean isPlay1Turn = true;
+
+    private Game() {}
 
     public static Game newGame() {
         return new Game();
@@ -31,6 +34,8 @@ public class Game {
     }
 
     public void playIn(String cellCoordinates) {
+        if (cellCoordinatesAreNotValid(cellCoordinates)) return;
+
         int colIndex = getColIndexFromCoordinates(cellCoordinates);
         int rowIndex = getRowIndexFromCoordinates(cellCoordinates);
 
@@ -39,6 +44,10 @@ public class Game {
         String symbolToPlay = getSymbolToPlayBasedOnTurn();
 
         board[rowIndex][colIndex] = symbolToPlay;
+    }
+
+    private boolean cellCoordinatesAreNotValid(String cellCoordinates) {
+        return cellCoordinates == null || !cellCoordinates.matches("[A-C][0-2]");
     }
 
     private boolean cellIsOccupied(int rowIndex, int colIndex) {

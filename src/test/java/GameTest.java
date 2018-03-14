@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class GameTest {
 
@@ -103,6 +103,24 @@ public class GameTest {
                                 "1O|X|O\n" +
                                 " -+-+-\n" +
                                 "2X|O|X";
+
+        assertEquals(expectedBoard, game.printBoard());
+    }
+
+    @Test
+    public void testWrongCoordinatesDoNotChangeBoard() {
+        Game game = Game.newGame();
+        game.playIn("ZZ");
+        game.playIn("something");
+        game.playIn("");
+        game.playIn(null);
+
+        String expectedBoard =  " A B C\n" +
+                                "0 | | \n" +
+                                " -+-+-\n" +
+                                "1 | | \n" +
+                                " -+-+-\n" +
+                                "2 | | ";
 
         assertEquals(expectedBoard, game.printBoard());
     }

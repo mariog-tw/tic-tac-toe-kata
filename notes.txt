@@ -2,4 +2,5 @@
 - test a new instanciated game has a fresh board - done
 - test command with position on board - done
 - test after X comes O - done
-- test wrong coordinates means no change
+- test wrong coordinates means no change - done
+- application test
