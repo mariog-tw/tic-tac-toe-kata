@@ -1,3 +1,4 @@
 - test new game command resulting in fresh board
-- test a new instanciated game has a fresh board
-- test command with position on board
+- test a new instanciated game has a fresh board - done
+- test command with position on board - done
+- test after X comes O - done

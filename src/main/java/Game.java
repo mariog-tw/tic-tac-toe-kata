@@ -5,6 +5,7 @@ public class Game {
         {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
         {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}
     };
+    private boolean isPlay1Turn = true;
 
     public static Game newGame() {
         return new Game();
@@ -27,5 +28,46 @@ public class Game {
             }
         }
         return sb.toString();
+    }
+
+    public void playIn(String cellCoordinates) {
+        int colIndex = getColIndexFromCoordinates(cellCoordinates);
+        int rowIndex = getRowIndexFromCoordinates(cellCoordinates);
+
+        if (cellIsOccupied(rowIndex, colIndex)) return;
+
+        String symbolToPlay = getSymbolToPlayBasedOnTurn();
+
+        board[rowIndex][colIndex] = symbolToPlay;
+    }
+
+    private boolean cellIsOccupied(int rowIndex, int colIndex) {
+        return !(board[rowIndex][colIndex] == EMPTY_CELL);
+    }
+
+    private String getSymbolToPlayBasedOnTurn() {
+        String symbolToPlay = isPlay1Turn ? "X" : "O";
+        isPlay1Turn = !isPlay1Turn;
+        return symbolToPlay;
+    }
+
+    private int getRowIndexFromCoordinates(String cellCoordinates) {
+        return Integer.parseInt(String.valueOf(cellCoordinates.toCharArray()[1]));
+    }
+
+    private int getColIndexFromCoordinates(String cellCoordinates) {
+        int colIndex = 0;
+        switch (cellCoordinates.toCharArray()[0]) {
+            case 'A':
+                colIndex = 0;
+                break;
+            case 'B':
+                colIndex = 1;
+                break;
+            case 'C':
+                colIndex = 2;
+                break;
+        }
+        return colIndex;
     }
 }
