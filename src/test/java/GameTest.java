@@ -124,4 +124,21 @@ public class GameTest {
 
         assertEquals(expectedBoard, game.printBoard());
     }
+
+    @Test
+    public void coordinatesShouldBeCaseInsensitive() {
+        Game game = Game.newGame();
+        game.playIn("a0");
+        game.playIn("B0");
+        game.playIn("c1");
+
+        String expectedBoard =  " A B C\n" +
+                                "0X|O| \n" +
+                                " -+-+-\n" +
+                                "1 | |X\n" +
+                                " -+-+-\n" +
+                                "2 | | ";
+
+        assertEquals(expectedBoard, game.printBoard());
+    }
 }

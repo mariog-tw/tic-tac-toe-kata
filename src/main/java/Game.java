@@ -47,7 +47,7 @@ public class Game {
     }
 
     private boolean cellCoordinatesAreNotValid(String cellCoordinates) {
-        return cellCoordinates == null || !cellCoordinates.matches("[A-C][0-2]");
+        return cellCoordinates == null || !cellCoordinates.matches("[A-Ca-c][0-2]");
     }
 
     private boolean cellIsOccupied(int rowIndex, int colIndex) {
@@ -66,7 +66,7 @@ public class Game {
 
     private int getColIndexFromCoordinates(String cellCoordinates) {
         int colIndex = 0;
-        switch (cellCoordinates.toCharArray()[0]) {
+        switch (cellCoordinates.toUpperCase().toCharArray()[0]) {
             case 'A':
                 colIndex = 0;
                 break;
