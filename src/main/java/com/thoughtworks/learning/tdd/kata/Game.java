@@ -1,3 +1,5 @@
+package com.thoughtworks.learning.tdd.kata;
+
 public class Game {
     private static final String EMPTY_CELL = " ";
 
@@ -34,7 +36,7 @@ public class Game {
     }
 
     public void playIn(String cellCoordinates) {
-        if (cellCoordinatesAreNotValid(cellCoordinates)) return;
+        if (cellCoordinatesAreInValidFormat(cellCoordinates)) return;
 
         int colIndex = getColIndexFromCoordinates(cellCoordinates);
         int rowIndex = getRowIndexFromCoordinates(cellCoordinates);
@@ -46,7 +48,7 @@ public class Game {
         board[rowIndex][colIndex] = symbolToPlay;
     }
 
-    private boolean cellCoordinatesAreNotValid(String cellCoordinates) {
+    private boolean cellCoordinatesAreInValidFormat(String cellCoordinates) {
         return cellCoordinates == null || !cellCoordinates.matches("[A-Ca-c]{1}[0-2]{1}");
     }
 

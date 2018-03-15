@@ -1,6 +1,6 @@
-import org.junit.Rule;
+package com.thoughtworks.learning.tdd.kata;
+
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -8,15 +8,13 @@ import java.io.PrintStream;
 import java.io.StringReader;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class ApplicationTest {
-    @Rule
-    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
-
     @Test
     public void testExitCommand() throws IOException {
-        exit.expectSystemExit();
-        new Application(new StringReader("exit\n"), System.out);
+        Application application = new Application(new StringReader("exit\n"), System.out);
+        assertFalse(application.isRunning());
     }
 
     @Test
@@ -31,10 +29,9 @@ public class ApplicationTest {
                                 "2 | | \n" +
                                 "Command: ";
 
-        exit.expectSystemExit();
-        exit.checkAssertionAfterwards(() -> assertEquals(expectedOutPut, outputBuffer.toString()));
-
         new Application(new StringReader("exit\n"), out);
+
+        assertEquals(expectedOutPut, outputBuffer.toString());
     }
 
     @Test
@@ -57,10 +54,9 @@ public class ApplicationTest {
                                 "2 | | \n" +
                                 "Command: ";
 
-        exit.expectSystemExit();
-        exit.checkAssertionAfterwards(() -> assertEquals(expectedOutPut, outputBuffer.toString()));
-
         new Application(new StringReader("A0\nexit\n"), out);
+
+        assertEquals(expectedOutPut, outputBuffer.toString());
     }
 
     @Test
@@ -91,9 +87,8 @@ public class ApplicationTest {
                                 "2 | | \n" +
                                 "Command: ";
 
-        exit.expectSystemExit();
-        exit.checkAssertionAfterwards(() -> assertEquals(expectedOutPut, outputBuffer.toString()));
-
         new Application(new StringReader("B1\nnew\nexit\n"), out);
+
+        assertEquals(expectedOutPut, outputBuffer.toString());
     }
 }
