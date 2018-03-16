@@ -3,10 +3,10 @@ package com.thoughtworks.learning.tdd.kata;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static com.thoughtworks.learning.tdd.kata.Game.*;
+import static org.junit.Assert.assertArrayEquals;
 
 public class GameTest {
-
     private Game game;
 
     @Before
@@ -16,42 +16,39 @@ public class GameTest {
 
     @Test
     public void newGameHasAnEmptyBoard() {
-        String emptyBoard = " A B C\n" +
-                            "0 | | \n" +
-                            " -+-+-\n" +
-                            "1 | | \n" +
-                            " -+-+-\n" +
-                            "2 | | ";
+        String[][] emptyBoard = new String[][]{
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}
+        };
 
-        assertEquals(emptyBoard, game.printBoard());
+        assertArrayEquals(emptyBoard, game.board());
     }
 
     @Test
     public void placeXAtCellA0() {
         game.playIn("A0");
 
-        String expectedBoard =  " A B C\n" +
-                                "0X| | \n" +
-                                " -+-+-\n" +
-                                "1 | | \n" +
-                                " -+-+-\n" +
-                                "2 | | ";
+        String[][] boardWithXInA0 = new String[][]{
+                {PLAYER_1_SYMBOL, EMPTY_CELL, EMPTY_CELL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}
+        };
 
-        assertEquals(expectedBoard, game.printBoard());
+        assertArrayEquals(boardWithXInA0, game.board());
     }
 
     @Test
     public void placeXAtCellC0() {
         game.playIn("C0");
 
-        String expectedBoard =  " A B C\n" +
-                                "0 | |X\n" +
-                                " -+-+-\n" +
-                                "1 | | \n" +
-                                " -+-+-\n" +
-                                "2 | | ";
+        String[][] boardWithXInC0 = new String[][]{
+                {EMPTY_CELL, EMPTY_CELL, PLAYER_1_SYMBOL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}
+        };
 
-        assertEquals(expectedBoard, game.printBoard());
+        assertArrayEquals(boardWithXInC0, game.board());
     }
 
     @Test
@@ -59,14 +56,13 @@ public class GameTest {
         game.playIn("A2");
         game.playIn("B1");
 
-        String expectedBoard =  " A B C\n" +
-                                "0 | | \n" +
-                                " -+-+-\n" +
-                                "1 |O| \n" +
-                                " -+-+-\n" +
-                                "2X| | ";
+        String[][] boardWithXInA2AndOInB1 = new String[][]{
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {EMPTY_CELL, PLAYER_2_SYMBOL, EMPTY_CELL},
+                {PLAYER_1_SYMBOL, EMPTY_CELL, EMPTY_CELL}
+        };
 
-        assertEquals(expectedBoard, game.printBoard());
+        assertArrayEquals(boardWithXInA2AndOInB1, game.board());
     }
 
     @Test
@@ -76,14 +72,13 @@ public class GameTest {
         game.playIn("A1");
         game.playIn("A2");
 
-        String expectedBoard =  " A B C\n" +
-                                "0 | | \n" +
-                                " -+-+-\n" +
-                                "1X| | \n" +
-                                " -+-+-\n" +
-                                "2X|O| ";
+        String[][] boardWithXInA2AndOInB1 = new String[][]{
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {PLAYER_1_SYMBOL, EMPTY_CELL, EMPTY_CELL},
+                {PLAYER_1_SYMBOL, PLAYER_2_SYMBOL, EMPTY_CELL}
+        };
 
-        assertEquals(expectedBoard, game.printBoard());
+        assertArrayEquals(boardWithXInA2AndOInB1, game.board());
     }
 
     @Test
@@ -101,14 +96,13 @@ public class GameTest {
         game.playIn("A1");
         game.playIn("A1");
 
-        String expectedBoard =  " A B C\n" +
-                                "0X|O|X\n" +
-                                " -+-+-\n" +
-                                "1O|X|O\n" +
-                                " -+-+-\n" +
-                                "2X|O|X";
+        String[][] wholeGameBoard = new String[][]{
+                {PLAYER_1_SYMBOL, PLAYER_2_SYMBOL, PLAYER_1_SYMBOL},
+                {PLAYER_2_SYMBOL, PLAYER_1_SYMBOL, PLAYER_2_SYMBOL},
+                {PLAYER_1_SYMBOL, PLAYER_2_SYMBOL, PLAYER_1_SYMBOL}
+        };
 
-        assertEquals(expectedBoard, game.printBoard());
+        assertArrayEquals(wholeGameBoard, game.board());
     }
 
     @Test
@@ -118,14 +112,13 @@ public class GameTest {
         game.playIn("");
         game.playIn(null);
 
-        String expectedBoard =  " A B C\n" +
-                                "0 | | \n" +
-                                " -+-+-\n" +
-                                "1 | | \n" +
-                                " -+-+-\n" +
-                                "2 | | ";
+        String[][] emptyBoard = new String[][]{
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}
+        };
 
-        assertEquals(expectedBoard, game.printBoard());
+        assertArrayEquals(emptyBoard, game.board());
     }
 
     @Test
@@ -134,13 +127,12 @@ public class GameTest {
         game.playIn("B0");
         game.playIn("c1");
 
-        String expectedBoard =  " A B C\n" +
-                                "0X|O| \n" +
-                                " -+-+-\n" +
-                                "1 | |X\n" +
-                                " -+-+-\n" +
-                                "2 | | ";
+        String[][] expectedBoard = new String[][]{
+                {PLAYER_1_SYMBOL, PLAYER_2_SYMBOL, EMPTY_CELL},
+                {EMPTY_CELL, EMPTY_CELL, PLAYER_1_SYMBOL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}
+        };
 
-        assertEquals(expectedBoard, game.printBoard());
+        assertArrayEquals(expectedBoard, game.board());
     }
 }

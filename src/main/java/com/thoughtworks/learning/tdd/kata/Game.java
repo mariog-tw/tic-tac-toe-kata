@@ -1,13 +1,16 @@
 package com.thoughtworks.learning.tdd.kata;
 
 public class Game {
-    private static final String EMPTY_CELL = " ";
+    static final String EMPTY_CELL = " ";
+    static final String PLAYER_1_SYMBOL = "X";
+    static final String PLAYER_2_SYMBOL = "O";
 
     private String[][] board = new String[][] {
         {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
         {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
         {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}
     };
+
     private boolean isPlay1Turn = true;
 
     private Game() {}
@@ -49,7 +52,7 @@ public class Game {
     }
 
     private boolean cellCoordinatesAreInValidFormat(String cellCoordinates) {
-        return cellCoordinates == null || !cellCoordinates.matches("[A-Ca-c]{1}[0-2]{1}");
+        return cellCoordinates == null || !cellCoordinates.matches("[A-Ca-c][0-2]{1}");
     }
 
     private boolean cellIsOccupied(int rowIndex, int colIndex) {
@@ -57,7 +60,7 @@ public class Game {
     }
 
     private String getSymbolToPlayBasedOnTurn() {
-        String symbolToPlay = isPlay1Turn ? "X" : "O";
+        String symbolToPlay = isPlay1Turn ? PLAYER_1_SYMBOL : PLAYER_2_SYMBOL;
         isPlay1Turn = !isPlay1Turn;
         return symbolToPlay;
     }
@@ -80,5 +83,9 @@ public class Game {
                 break;
         }
         return colIndex;
+    }
+
+    String[][] board() {
+        return board.clone();
     }
 }

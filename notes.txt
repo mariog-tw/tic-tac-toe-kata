@@ -4,3 +4,12 @@
 - test after X comes O - done
 - test wrong coordinates means no change - done
 - application test
+
+
+
+//        String emptyBoard = " A B C\n" +
+//                            "0 | | \n" +
+//                            " -+-+-\n" +
+//                            "1 | | \n" +
+//                            " -+-+-\n" +
+//                            "2 | | ";
