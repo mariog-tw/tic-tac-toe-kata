@@ -10,7 +10,7 @@ public class GameTest {
     private Game game;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         game = Game.newGame();
     }
 

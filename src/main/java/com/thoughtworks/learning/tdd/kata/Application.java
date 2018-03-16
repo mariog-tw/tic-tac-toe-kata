@@ -7,6 +7,7 @@ import java.io.*;
 public class Application {
     private Game game = Game.newGame();
     private boolean finished = false;
+    private GameBoardPrinter gameBoardPrinter = new GameBoardPrinter();
 
     public Application(Reader reader, PrintStream printStream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(reader);
@@ -19,7 +20,7 @@ public class Application {
                 firstPrint = false;
             }
 
-            printStream.print(game.printBoard());
+            printStream.print(gameBoardPrinter.printBoard(game.board()));
             printStream.print("\nCommand: ");
             String command = bufferedReader.readLine();
 
