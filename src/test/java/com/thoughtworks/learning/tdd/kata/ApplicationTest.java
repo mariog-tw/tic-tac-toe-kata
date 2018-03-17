@@ -91,4 +91,50 @@ public class ApplicationTest {
 
         assertEquals(expectedOutPut, outputBuffer.toString());
     }
+
+    @Test
+    public void testNewExtendedGameApplication() throws IOException {
+        ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(outputBuffer);
+        String expectedOutPut = " A B C\n" +
+                                "0 | | \n" +
+                                " -+-+-\n" +
+                                "1 | | \n" +
+                                " -+-+-\n" +
+                                "2 | | \n" +
+                                "Command: " +
+                                "\n\n" +
+                                " A B C D\n" +
+                                "0 | | | \n" +
+                                " -+-+-+-\n" +
+                                "1 | | | \n" +
+                                " -+-+-+-\n" +
+                                "2 | | | \n" +
+                                " -+-+-+-\n" +
+                                "3 | | | \n" +
+                                "Command: " +
+                                "\n\n" +
+                                " A B C D\n" +
+                                "0 | | | \n" +
+                                " -+-+-+-\n" +
+                                "1 |X| | \n" +
+                                " -+-+-+-\n" +
+                                "2 | | | \n" +
+                                " -+-+-+-\n" +
+                                "3 | | | \n" +
+                                "Command: " +
+                                "\n\n" +
+                                " A B C D\n" +
+                                "0 | | | \n" +
+                                " -+-+-+-\n" +
+                                "1 |X| | \n" +
+                                " -+-+-+-\n" +
+                                "2 | | | \n" +
+                                " -+-+-+-\n" +
+                                "3 | | |O\n" +
+                                "Command: ";
+
+        new Application(new StringReader("new 4\nB1\nD3\nexit\n"), out);
+        assertEquals(expectedOutPut, outputBuffer.toString());
+    }
 }
