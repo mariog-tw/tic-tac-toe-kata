@@ -5,7 +5,7 @@ import com.thoughtworks.learning.tdd.kata.command.ApplicationCommandInterpreter;
 import java.io.*;
 
 public class Application {
-    private Game game = Game.newGame();
+    private Game game = Game.newClassicGame();
     private boolean finished = false;
     private GameBoardPrinter gameBoardPrinter = new GameBoardPrinter();
 

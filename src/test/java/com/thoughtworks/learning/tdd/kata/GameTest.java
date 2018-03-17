@@ -11,7 +11,7 @@ public class GameTest {
 
     @Before
     public void setUp() {
-        game = Game.newGame();
+        game = Game.newClassicGame();
     }
 
     @Test
@@ -131,6 +131,23 @@ public class GameTest {
                 {PLAYER_1_SYMBOL, PLAYER_2_SYMBOL, EMPTY_CELL},
                 {EMPTY_CELL, EMPTY_CELL, PLAYER_1_SYMBOL},
                 {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}
+        };
+
+        assertArrayEquals(expectedBoard, game.board());
+    }
+
+    @Test
+    public void boardCanBeAlso4x4() {
+        game = Game.newExtendedGame();
+
+        game.playIn("a2");
+        game.playIn("d3");
+
+        String[][] expectedBoard = new String[][] {
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {PLAYER_1_SYMBOL, EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+                {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL, PLAYER_2_SYMBOL}
         };
 
         assertArrayEquals(expectedBoard, game.board());

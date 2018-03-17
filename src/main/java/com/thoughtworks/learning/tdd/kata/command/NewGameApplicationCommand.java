@@ -6,6 +6,6 @@ import com.thoughtworks.learning.tdd.kata.Game;
 public class NewGameApplicationCommand implements ApplicationCommand {
     @Override
     public void executeIn(Application application) {
-        application.setGame(Game.newGame());
+        application.setGame(Game.newClassicGame());
     }
 }
