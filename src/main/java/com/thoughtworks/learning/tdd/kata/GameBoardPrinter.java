@@ -1,49 +1,74 @@
 package com.thoughtworks.learning.tdd.kata;
 
 public class GameBoardPrinter {
-    public String printBoard(String[][] board) {
+    private String[][] board;
+    private final String rowSeparator;
+
+    public GameBoardPrinter(String[][] board) {
+        this.board = board;
+        this.rowSeparator = rowSeparatorFor(board);
+    }
+
+    public String printBoard() {
+        return headers() + rows();
+    }
+
+    private String rows() {
         StringBuilder sb = new StringBuilder();
-        String columnsHeader = createColumnsHeaderFor(board);
-        String rowSeparator = createRowSeparatorFor(board);
 
-        sb.append(columnsHeader);
-
-        for (int rowIndex = 0; rowIndex < board.length; rowIndex++) {
-            sb.append(rowIndex);
-            for (int columnIndex = 0; columnIndex < board[rowIndex].length; columnIndex++) {
-                sb.append(board[rowIndex][columnIndex]).append("|");
-            }
-            sb.deleteCharAt(sb.length()-1);
-
-            if (rowIndex != board.length-1) {
-                sb.append("\n");
-                sb.append(rowSeparator);
-            }
+        for (int rowIndex = 0; rowIndex < this.board.length; rowIndex++) {
+            sb.append(row(rowIndex));
         }
+
         return sb.toString();
     }
 
-    private String createColumnsHeaderFor(String[][] board) {
+    private String row(int index) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(index);
+        for (int columnIndex = 0; columnIndex < this.board[index].length; columnIndex++) {
+            sb.append(this.board[index][columnIndex]).append("|");
+        }
+        removeLastCharFrom(sb);
+
+        if (!isLastRow(index)) {
+            sb.append("\n");
+            sb.append(this.rowSeparator);
+        }
+
+        return sb.toString();
+    }
+
+    private boolean isLastRow(int index) {
+        return index == this.board.length-1;
+    }
+
+    private void removeLastCharFrom(StringBuilder sb) {
+        sb.deleteCharAt(sb.length()-1);
+    }
+
+    private String headers() {
         StringBuilder sb = new StringBuilder();
 
         sb.append(" ");
-        for (int i=0; i<board.length; i++) {
+        for (int i = 0; i< this.board.length; i++) {
             sb.append((char)('A' + i)).append(" ");
         }
-        sb.deleteCharAt(sb.length()-1);
+        removeLastCharFrom(sb);
         sb.append("\n");
 
         return sb.toString();
     }
 
-    private String createRowSeparatorFor(String[][] board) {
+    private String rowSeparatorFor(String[][] board) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(" ");
-        for (int i=0; i<board.length; i++) {
+        for (String[] column : board) {
             sb.append("-+");
         }
-        sb.deleteCharAt(sb.length()-1);
+        removeLastCharFrom(sb);
         sb.append("\n");
 
         return sb.toString();
