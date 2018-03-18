@@ -27,7 +27,7 @@ public class Game {
     }
 
     public void playIn(String cellCoordinates) {
-        if (cellCoordinatesAreInValidFormat(cellCoordinates)) return;
+        if (cellCoordinatesAreNotInValidFormat(cellCoordinates)) return;
 
         int colIndex = getColIndexFromCoordinates(cellCoordinates);
         int rowIndex = getRowIndexFromCoordinates(cellCoordinates);
@@ -39,7 +39,7 @@ public class Game {
         board[rowIndex][colIndex] = symbolToPlay;
     }
 
-    private boolean cellCoordinatesAreInValidFormat(String cellCoordinates) {
+    private boolean cellCoordinatesAreNotInValidFormat(String cellCoordinates) {
         String validCoordinatesRegexp = (board.length == 3)
                 ? "[A-Ca-c][0-2]{1}"
                 : "[A-Da-d][0-3]{1}";
